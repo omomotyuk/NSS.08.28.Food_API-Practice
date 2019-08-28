@@ -5,8 +5,6 @@ fetch("http://localhost:8088/food")
         console.table(parsedFoods)
     })
 */
-/*
-*/
 
 const foodContainer = document.querySelector( '.food-list' );
 
@@ -27,10 +25,13 @@ function addFoodToDom ( htmlString ) {
     foodContainer.innerHTML += htmlString;
 }
 
-
 fetch("http://localhost:8088/food")
-    .then(foods => foods.json())
+    .then(foods => { 
+        console.log( "foods from server", foods );
+        return foods.json();
+    })
     .then(parsedFoods => {
+        console.log( "parsedFoods", parsedFoods );
         parsedFoods.forEach(food => {
             const foodAsHTML = createFoodHTML( food )
             addFoodToDom(foodAsHTML)
